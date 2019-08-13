@@ -1,34 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState, useRef} from 'react';
+import Poster from './Poster';
+import Player from './Player';
 import './Reset.css';
 import './App.css';
 
 function App() {
+  const [items, setItems] = useState([]);
+  const [videoSource, setVideoSource] = useState('');
+  const player = useRef(null);
+
+  useEffect(() => {
+    fetch('https://api.myjson.com/bins/so5pk')
+      .then(response => response.json())
+      .then(data => setItems(data));
+  }, [])
+
+  const posterClickHandler = selectedVideoSource => {
+    setVideoSource(selectedVideoSource);
+    player.current.load();
+    player.current.play();
+  }
+
   return (
     <div className="container">
-      <div className="player">
-        <video controls name="media">
-          <source src="http://mirrors.standaloneinstaller.com/video-sample/dolbycanyon.mp4" type="video/mp4"></source>
-          Your browser does not support HTML5 video.
-        </video>
-      </div>
-      <div className="list">
-        <div className="item">
-          <img className="thumbnail" src="https://iptvimagecache-playplus-prod-vip.han.telia.se/crop/200x290/http%3A%2F%2Fiptvlogin.telia.se%2F%2FSF%20Anytime%2F4749441.jpg" />
-          <span className="title">Aquaman</span>
-        </div>
-        <div className="item">
-          <img className="thumbnail" src="https://iptvimagecache-playplus-prod-vip.han.telia.se/crop/200x290/http%3A%2F%2Fiptvlogin.telia.se%2F%2FSF%20Anytime%2F4749441.jpg" />
-          <span className="title">Aquaman</span>
-        </div>
-        <div className="item">
-          <img className="thumbnail" src="https://iptvimagecache-playplus-prod-vip.han.telia.se/crop/200x290/http%3A%2F%2Fiptvlogin.telia.se%2F%2FSF%20Anytime%2F4749441.jpg" />
-          <span className="title">Aquaman</span>
-        </div>
-        <div className="item">
-          <img className="thumbnail" src="https://iptvimagecache-playplus-prod-vip.han.telia.se/crop/200x290/http%3A%2F%2Fiptvlogin.telia.se%2F%2FSF%20Anytime%2F4749441.jpg" />
-          <span className="title">Aquaman</span>
-        </div>
-      </div>
+      
+      <Player videoSource={videoSource} reference={player} />
+
+      {!! items.length && <div className="list">
+        {items.map((item, i) => <Poster key={i} posterClickHandler={posterClickHandler} videoSource={item.video} thumbnailSource={item.image} name={item.name} />)}
+      </div>}
+
     </div>
   );
 }

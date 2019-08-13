@@ -48,17 +48,17 @@ body {
   }
 }
 
-.list .item {
+.list .poster {
   position: relative;
   width: 100%;
   text-align: center;
 }
 
-.list .item img {
+.list .poster img {
   width: 100%;
 }
 
-.list .item .title {
+.list .poster .name {
   display: block;
   margin: 10px 0px;
 }
