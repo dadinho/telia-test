@@ -1,15 +1,15 @@
 import React from 'react';
 
-const Poster = ({thumbnailSource, videoSource, name, description, posterClickHandler, posterHoverHandler}) => {
+const Poster = ({data, posterClickHandler, posterHoverHandler}) => {
 	
-	const clickHandler = () => {
-		posterClickHandler(videoSource);
-	}
+	const clickHandler = () => posterClickHandler(data.video);
+	const mouseEnterHandler = () => posterHoverHandler('enter', data.description);
+	const mouseLeaveHandler = () => posterHoverHandler('leave', data.description);
 
 	return (
-		<div className="poster" videosource={videoSource} onClick={clickHandler} onMouseEnter={() => posterHoverHandler('enter', description)} onMouseLeave={() => posterHoverHandler('leave', description)}>
-			<img className="thumbnail" alt={name} src={thumbnailSource} />
-			<span className="name">{name}</span>
+		<div className="poster" onClick={clickHandler} onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
+			<img className="thumbnail" alt={data.name} src={data.image} />
+			<span className="name">{data.name}</span>
 		</div>
 	)
 }

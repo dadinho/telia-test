@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 
 const activateFollowing = infoBox => {
-	
 	window.addEventListener("mousemove", (event) => {
 		const infoBoxWidth = infoBox.offsetWidth;
 		const infoBoxHeight = infoBox.offsetHeight; 
@@ -13,8 +12,7 @@ const activateFollowing = infoBox => {
 		
 		infoBox.style.left = infoBoxPositionX + 'px';
 		infoBox.style.top = infoBoxPositionY + 'px';
-	})
-
+	});
 }
 
 const Info = ({description, reference}) => {

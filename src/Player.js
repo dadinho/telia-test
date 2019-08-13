@@ -1,4 +1,6 @@
 import React from 'react';
+import play from './icon/play.svg';
+import pause from './icon/pause.svg';
 
 const Player = ({videoSource, reference}) => (
 	<>
@@ -8,8 +10,10 @@ const Player = ({videoSource, reference}) => (
 				Your browser does not support HTML5 video.
 			</video>
 		</div>
-		<button onClick={() => reference.current.play()}>Play</button>
-		<button onClick={() => reference.current.pause()}>Pause</button>
+		<div className="control">
+			<img alt="play" className="icon" src={play} onClick={() => reference.current.play()} />
+			<img alt="pause" className="icon" src={pause} onClick={() => reference.current.pause()} />
+		</div>
 	</>
 )
 

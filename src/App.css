@@ -33,6 +33,20 @@ body {
   height: 100%;
 }
 
+.control {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px 0px;
+}
+
+.control .icon {
+  display: block;
+  margin: 0px 10px;
+  width: 30px;
+  cursor: pointer
+}
+
 .list {
   display: grid;
   margin: 10px 0px;
@@ -51,6 +65,7 @@ body {
   position: relative;
   width: 100%;
   text-align: center;
+  cursor: pointer;
 }
 
 .list .poster img {

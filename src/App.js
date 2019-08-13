@@ -18,31 +18,25 @@ function App() {
       .then(data => setItems(data));
   }, [])
 
-  const posterClickHandler = (selectedVideoSource, description) => {
+  const posterClickHandler = (selectedVideoSource) => {
     setVideoSource(selectedVideoSource);
-    
     player.current.load();
     player.current.play();
   }
   
   const posterHoverHandler = (direction, description) => {
     setDescription(description);
-    
     if (direction === 'enter') infobox.current.style.display = 'block';
     if (direction === 'leave') infobox.current.style.display = 'none';
   }
 
   return (
     <div className="container">
-      
       <Info description={description} reference={infobox} />
-
       <Player videoSource={videoSource} reference={player} />
-
       {!! items.length && <div className="list">
-        {items.map((item, i) => <Poster key={i} posterHoverHandler={posterHoverHandler} description={item.description} posterClickHandler={posterClickHandler} videoSource={item.video} thumbnailSource={item.image} name={item.name} />)}
+        {items.map((item, i) => <Poster key={i} data={item} posterHoverHandler={posterHoverHandler} posterClickHandler={posterClickHandler} />)}
       </div>}
-
     </div>
   );
 }
